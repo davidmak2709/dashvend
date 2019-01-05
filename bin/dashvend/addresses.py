@@ -4,9 +4,10 @@ bip32 address management
 import os
 
 from config import DASHVEND_DIR, BIP32_MAINNET_SEED, BIP32_TESTNET_SEED
-from logger import info
+from logger import info,debug
 from pycoin.key import Key
-
+from pycoin.ui.key_from_text import key_from_text
+#from bitcoinrpc.authproxy import JSONRPCException
 
 class Bip32Chain(object):
 
@@ -14,7 +15,7 @@ class Bip32Chain(object):
         self.dashrpc = dashrpc
         self.mainnet = mainnet
         self._init_state_dir(os.path.join(DASHVEND_DIR, 'state'))
-        self.key = Key.from_text(
+        self.key = key_from_text(
             mainnet and BIP32_MAINNET_SEED or BIP32_TESTNET_SEED)
         self._init_next_address()
 
@@ -40,17 +41,20 @@ class Bip32Chain(object):
 
     def get_bip32_address_info(self, index):
         """ get bip32 address and received amount """
-        addr = self.key.subkey(index).address(use_uncompressed=False)
-        return {
+        addr = self.dashrpc._proxy.getnewaddress()
+        d = {
             "index": index,
             "addr": addr,
             "received": float(
                 self.dashrpc._proxy.getreceivedbyaddress(addr))
         }
+        
+        print(d)
+        return d
 
     def _init_next_address(self, increment=False):
         """ find next unused bip32 address, update state """
-        r = self.dashrpc._proxy
+        #r = self.dashrpc._proxy
         index = int(self._index_state())
         if increment:
             index += 1
@@ -61,7 +65,13 @@ class Bip32Chain(object):
                 index += 1
                 continue
             unused_found = True
-        r.importaddress(addr['addr'], 'bip-'+str(index), False)
+        """
+        try:    
+            r.importaddress(addr['addr'], 'bip-'+str(index), False)
+            #r.importprivkey(self.key.subkey(index).wif(),"",False)
+        except JSONRPCException as e:
+            debug("**** " + e.error['message'] + " ****")
+        """
         self._index_state(index)
         self.next_address = addr
 
@@ -69,3 +79,4 @@ class Bip32Chain(object):
         self._init_next_address(increment)
         info("--> new active payment address: %s" % self.next_address['addr'])
         return self.next_address['addr']
+

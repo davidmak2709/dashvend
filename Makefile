@@ -15,8 +15,8 @@ repos:
 	ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
 	cd pycoin; sudo python setup.py install
 
-dashd:
-	bin/_install_dashd.sh
+#dashd:
+#	bin/_install_dashd.sh
 
 setuids:
 	cp src/show_image.c bin/show_image.c

@@ -5,6 +5,7 @@ from collections import deque
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException, httplib
 from logger import info
 
+from config import DASHCORE_DIR
 
 def simplemovingaverage(period):
     assert period == int(period) and period > 0, "Period must be an integer >0"
@@ -12,6 +13,8 @@ def simplemovingaverage(period):
     values = deque([0.0] * period)
 
     def sma(x):
+        x = str(x)
+        x = x.replace(",",".")
         x = float(x)
         values.append(x)
         val['summ'] += x - values.popleft()
@@ -29,7 +32,8 @@ class DashRPC(object):
         self.mainnet = mainnet
         self.datadir = os.path.join(os.environ['HOME'],
                                     '.dash', (not mainnet and 'testnet' or ''))
-        self.conffile = conf and conf or os.path.join(self.datadir, 'dash.conf')
+        #self.conffile = conf and conf or os.path.join(self.datadir, 'dash.conf')
+        self.conffile=DASHCORE_DIR + '/dash.conf'
         self.config = {}
         self.cpu_pct = simplemovingaverage(5)
         self._parse_conffile()
@@ -62,8 +66,8 @@ class DashRPC(object):
         return self._proxy
 
     def get_cpu_average(self):
-        pidfile = self.mainnet and '.dash/dashd.pid' or '.dash/testnet/testnet3/dashd.pid'  # noqa
-        cmd = "top -p `cat $HOME/%s` -n1 | awk '/ dashd /{print $10}'" % pidfile
+        pidfile = self.mainnet and DASHCORE_DIR + '/dashd.pid' or DASHCORE_DIR + '/testnet/testnet3/dashd.pid'  # noqa
+        cmd = "top -p `cat %s` -n1 | awk '/ dashd /{print $10}'" % pidfile
         cpu = subprocess.check_output(cmd, shell=True).rstrip('\n') or 100
         return self.cpu_pct(cpu)
 
@@ -74,7 +78,7 @@ class DashRPC(object):
         self.get_cpu_average()
 
         try:
-            self._proxy.getinfo()
+            self._proxy.getbalance()
             self.responding = True
         except (ValueError, socket.error, httplib.CannotSendRequest) as e:
             # print "daemon offline"
@@ -85,9 +89,7 @@ class DashRPC(object):
             pass
 
         try:
-            resp = self._proxy.masternode('debug')
-            if 'Node just started' not in resp:
-                self.synchronised = True
+            self.synchronised = self._proxy.mnsync("status")["IsBlockchainSynced"]            
         except (ValueError, socket.error, httplib.CannotSendRequest) as e:
             # print "daemon offline"
             pass
@@ -112,3 +114,4 @@ class DashRPC(object):
 #            getattr(self._proxy, attr)()
 #        else:
 #            raise AttributeError
+

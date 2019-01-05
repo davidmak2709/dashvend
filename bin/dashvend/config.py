@@ -6,6 +6,13 @@ DASHVEND_DIR = '/home/pi/dashvend'
 #   bin/dashvend_screens.screenrc
 #   bin/show_screen_number.sh
 
+
+
+# set your dashcore dir location
+DASHCORE_DIR = ""
+
+#  ./dashrpc.py - for pid file
+
 # after testing, set this to True to use mainnet
 MAINNET = False
 
