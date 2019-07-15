@@ -4,8 +4,8 @@ sale trigger (invokes setuid relay toggle)
 
 import os
 import subprocess
-from config import DASHVEND_DIR
-from logger import info
+from . config import DASHVEND_DIR
+from . logger import info
 
 
 class Trigger(object):

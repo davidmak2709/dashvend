@@ -3,8 +3,8 @@ bip32 address management
 """
 import os
 
-from config import DASHVEND_DIR, BIP32_MAINNET_SEED, BIP32_TESTNET_SEED
-from logger import info,debug
+from . config import DASHVEND_DIR, BIP32_MAINNET_SEED, BIP32_TESTNET_SEED
+from . logger import info,debug
 from pycoin.key import Key
 from pycoin.ui.key_from_text import key_from_text
 #from bitcoinrpc.authproxy import JSONRPCException
@@ -48,7 +48,7 @@ class Bip32Chain(object):
             "received": float(
                 self.dashrpc._proxy.getreceivedbyaddress(addr))
         }
-        
+
         print(d)
         return d
 
@@ -66,7 +66,7 @@ class Bip32Chain(object):
                 continue
             unused_found = True
         """
-        try:    
+        try:
             r.importaddress(addr['addr'], 'bip-'+str(index), False)
             #r.importprivkey(self.key.subkey(index).wif(),"",False)
         except JSONRPCException as e:
@@ -79,4 +79,3 @@ class Bip32Chain(object):
         self._init_next_address(increment)
         info("--> new active payment address: %s" % self.next_address['addr'])
         return self.next_address['addr']
-

@@ -3,9 +3,9 @@ import socket
 import subprocess
 from collections import deque
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException, httplib
-from logger import info
+from . logger import info
 
-from config import DASHCORE_DIR
+from . config import DASHCORE_DIR
 
 def simplemovingaverage(period):
     assert period == int(period) and period > 0, "Period must be an integer >0"
@@ -31,7 +31,7 @@ class DashRPC(object):
                  ):
         self.mainnet = mainnet
         self.datadir = os.path.join(os.environ['HOME'],
-                                    '.dash', (not mainnet and 'testnet' or ''))
+                                    'dash', (not mainnet and 'testnet' or ''))
         #self.conffile = conf and conf or os.path.join(self.datadir, 'dash.conf')
         self.conffile=DASHCORE_DIR + '/dash.conf'
         self.config = {}
@@ -89,7 +89,7 @@ class DashRPC(object):
             pass
 
         try:
-            self.synchronised = self._proxy.mnsync("status")["IsBlockchainSynced"]            
+            self.synchronised = self._proxy.mnsync("status")["IsBlockchainSynced"]
         except (ValueError, socket.error, httplib.CannotSendRequest) as e:
             # print "daemon offline"
             pass
@@ -114,4 +114,3 @@ class DashRPC(object):
 #            getattr(self._proxy, attr)()
 #        else:
 #            raise AttributeError
-

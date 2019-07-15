@@ -9,4 +9,7 @@ bin/show_image
 bin/show_image.c
 bin/trigger_relay
 bin/trigger_relay.c
+bin/dashvend/BIP32_*
 dashvend.log
+ku-mainnet.txt
+ku-testnet.txt

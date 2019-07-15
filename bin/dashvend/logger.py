@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from config import DASHVEND_DIR
+from . config import DASHVEND_DIR
 
 LOGFILE = os.path.join(DASHVEND_DIR, 'dashvend.log')
 LEVEL = logging.DEBUG

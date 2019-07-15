@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # FIXME -- move to common include
-VEND_DIR=/home/pi/dashvend
+VEND_DIR=/home/david/dashvend
 BIN_DIR=$VEND_DIR/bin
 IMAGEDIR=$VEND_DIR/display/source_images
 OUTDIR=/tmp/rendered_images
@@ -47,7 +47,7 @@ function gen_screen_payment_rejected(){
     /usr/bin/composite -geometry +135+450 $IMAGEDIR/instantx40.png $IMG_BG_REJECTED_SCREEN $OUTDIR/payment_rejected.png
     /usr/bin/convert $OUTDIR/payment_rejected.png \
         -fill "rgb(28,117,188)" -pointsize 45 -draw \
-            'text 145,155 "PAYMENT" 
+            'text 145,155 "PAYMENT"
              text 125,220 "RETURNED"
              text 55,365 "TRY AGAIN WITH"' \
     $OUTDIR/screen-3.png

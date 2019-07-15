@@ -3,7 +3,7 @@ vending display driver - bash script wrapper
 """
 
 import os
-from config import DASHVEND_DIR
+from . config import DASHVEND_DIR
 
 # bash script for displaying screen updates
 SCREEN_DRIVER_SCRIPT = os.path.join(DASHVEND_DIR,

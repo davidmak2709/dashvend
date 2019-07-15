@@ -1,5 +1,5 @@
 # set this to the full path to the dashvend respository checkout
-DASHVEND_DIR = '/home/pi/dashvend'
+DASHVEND_DIR = '/home/david/dashvend'
 # note: also update paths in:
 #   bin/.init.d.dashvend
 #   bin/_dashvend_control.sh
@@ -9,9 +9,7 @@ DASHVEND_DIR = '/home/pi/dashvend'
 
 
 # set your dashcore dir location
-DASHCORE_DIR = ""
-
-#  ./dashrpc.py - for pid file
+DASHCORE_DIR = "/home/david/dash"
 
 # after testing, set this to True to use mainnet
 MAINNET = False
@@ -19,6 +17,7 @@ MAINNET = False
 # **public** mainnet bip32 seed for vending address generation
 BIP32_MAINNET_SEED = 'drkpRxPP5eefb7GqpdDSQKGPjJHHuBqPJJVD2Qx4BHF7CVP1dC8uVxVy6JfDQsn1U1EazDZPa4DWMsmV7pDhMtLTQQypHHc6cFnPPYZvwib5nVi'  # noqa
 # on a secure machine, generate above with pycoin 'ku' command.
+# or just copy the seed in the BIP32_MAINNET_SEED file
 # for testing, ku is already installed on this machine during the 'make'
 # install pycoin by doing:
 # git clone https://github.com/richardkiss/pycoin.git
@@ -30,11 +29,7 @@ BIP32_MAINNET_SEED = 'drkpRxPP5eefb7GqpdDSQKGPjJHHuBqPJJVD2Qx4BHF7CVP1dC8uVxVy6J
 # **public** testnet bip32 seed for vending address generation
 BIP32_TESTNET_SEED = 'DRKPuUbaZSQn2SV5vyTh9DRHcooktYP3TB3NQa8cgMGXxT8znzH5opFtDgY8PVTKzTohyEfitf1TkcxnygJdY7ACJxvbVTvSVn6q6gCEVfydtJ6y'  # noqa
 # ku -n tDASH -s 0p/0 P:<a unique, unpublished 100 character long sentence>
-
-# require seven (out of ten) masternode locks to accept purchase
-IX_LOCK_TRESHOLD = 7
-# note: sometimes all ten locks do not fully propagate across the network,
-# settings above 9 are not recommended.
+# or just copy the seed in the BIP32_TESTNET_SEED file
 
 # dash value required to trigger sale
 VENDING_COST = 0.01

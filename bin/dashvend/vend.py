@@ -4,10 +4,10 @@ vending app - processing, display, and relay trigger interface
 
 from threading import Timer
 
-from config import VENDING_COST
-from display import Display  # lcd screen for payment screens
-from logger import info, warn  # stdout and file logging
-from trigger import Trigger  # interface to machine relay
+from . config import VENDING_COST
+from . display import Display  # lcd screen for payment screens
+from . logger import warn  # stdout and file logging
+from . trigger import Trigger  # interface to machine relay
 
 from bitcoinrpc.authproxy import JSONRPCException
 
@@ -69,8 +69,8 @@ class Vend(object):
             self.trigger_sale()
         else:
             self._refund(tx)
-      
-    
+
+
     def _refund(self, tx):
         amount = float(tx["amount"])
         address = self.select_return_address(tx["txid"])
@@ -80,7 +80,7 @@ class Vend(object):
         elif amount > VENDING_COST:
             self.sendtoaddress(addr = address,amount = amount - VENDING_COST)
             self.trigger_sale()
-    
+
     def sendtoaddress(self, addr, amount):
         p = self.dashrpc._proxy
         try:
@@ -91,8 +91,8 @@ class Vend(object):
             warn("    %s to %s " % (amount, addr))
             warn("    wallet balance: %s" % (p.getbalance()))
             warn("**********************************************************")
-            
-    
+
+
     def get_txn(self, txid):
         p = self.dashrpc._proxy
         return p.getrawtransaction(txid,True)
@@ -100,5 +100,4 @@ class Vend(object):
     def select_return_address(self, txid):
         prevout = self.get_txn(txid)["vin"][0]
         source = self.get_txn(prevout["txid"])["vout"]
-        return source[prevout["vout"]]["scriptPubKey"]["addresses"][0] 
-
+        return source[prevout["vout"]]["scriptPubKey"]["addresses"][0]

@@ -3,6 +3,7 @@ default: deps repos dashd setuids
 
 deps:
 	sudo apt-get -y install vim git imagemagick fbi qrencode curl unzip screen python-setuptools
+	sudo pip3 install pyzmq
 
 repos:
 	mkdir -p repos
@@ -13,10 +14,12 @@ repos:
 	ln -f -s ../repos/python-bitcoinrpc/bitcoinrpc ../bin/bitcoinrpc; \
 	ln -f -s ../repos/pycoin/pycoin ../bin/pycoin; \
 	ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
-	cd pycoin; sudo python setup.py install
+	cd pycoin; \
+	git reset --hard "994c4c714f599c795f4b7d7f305926ca6cdd0349"; \
+	sudo python setup.py install
 
-#dashd:
-#	bin/_install_dashd.sh
+dashd:
+	bin/_install_dashd.sh
 
 setuids:
 	cp src/show_image.c bin/show_image.c
@@ -30,11 +33,11 @@ setuids:
 	sudo chmod 4755 bin/trigger_relay
 
 init:
-	sudo cp bin/.init.d.dashvend /etc/init.d/dashvend
-	sudo update-rc.d dashvend remove
-	sudo update-rc.d dashvend defaults
-	sudo update-rc.d dashvend enable
-	@# TODO bip generation
+	#sudo cp bin/.init.d.dashvend /etc/init.d/dashvend
+	#sudo update-rc.d dashvend remove
+	#sudo update-rc.d dashvend defaults
+	#sudo update-rc.d dashvend enable
+	bin/gen_wallet_key.sh
 
 clean:
 	find . -type f -name '*.pyc' -exec rm {} \;
