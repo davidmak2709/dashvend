@@ -7,7 +7,7 @@ from . config import DASHVEND_DIR, BIP32_MAINNET_SEED, BIP32_TESTNET_SEED
 from . logger import info,debug
 from pycoin.key import Key
 from pycoin.ui.key_from_text import key_from_text
-#from bitcoinrpc.authproxy import JSONRPCException
+from bitcoinrpc.authproxy import JSONRPCException
 
 class Bip32Chain(object):
 
@@ -54,7 +54,7 @@ class Bip32Chain(object):
 
     def _init_next_address(self, increment=False):
         """ find next unused bip32 address, update state """
-        #r = self.dashrpc._proxy
+        r = self.dashrpc._proxy
         index = int(self._index_state())
         if increment:
             index += 1
@@ -65,13 +65,13 @@ class Bip32Chain(object):
                 index += 1
                 continue
             unused_found = True
-        """
+
         try:
             r.importaddress(addr['addr'], 'bip-'+str(index), False)
-            #r.importprivkey(self.key.subkey(index).wif(),"",False)
+            r.importprivkey(self.key.subkey(index).wif(),"",False)
         except JSONRPCException as e:
             debug("**** " + e.error['message'] + " ****")
-        """
+
         self._index_state(index)
         self.next_address = addr
 

@@ -52,7 +52,7 @@ class Vend(object):
 
     def trigger_sale(self):
         self.set_state(Vend.SALE)
-    #    self.trigger.trigger()
+        self.trigger.trigger()
         Timer(15, lambda: self.set_state(Vend.READY), ()).start()
 
     def show_txrefund(self):
