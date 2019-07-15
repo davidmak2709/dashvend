@@ -30,13 +30,13 @@ if [ ! -e bootstrap.dat ]; then
 fi
 
 cd testnet/testnet3
-#if [ ! -e bootstrap.dat ]; then
-#    wget https://raw.githubusercontent.com/UdjinM6/dash-bootstrap/master/links-testnet.md -O links-testnet.md
-#    TESTNET_BOOTSTRAP_FILE=$(head -1 links-testnet.md | awk '{print $9}' | sed 's/.*\(http.*\.zip\).*/\1/')
-#    wget $TESTNET_BOOTSTRAP_FILE
-#    unzip ${TESTNET_BOOTSTRAP_FILE##*/}
-#    rm links-testnet.md bootstrap.dat*.zip
-#fi
+if [ ! -e bootstrap.dat ]; then
+    wget https://raw.githubusercontent.com/UdjinM6/dash-bootstrap/master/links-testnet.md -O links-testnet.md
+    TESTNET_BOOTSTRAP_FILE=$(head -1 links-testnet.md | awk '{print $9}' | sed 's/.*\(http.*\.zip\).*/\1/')
+    wget $TESTNET_BOOTSTRAP_FILE
+    unzip ${TESTNET_BOOTSTRAP_FILE##*/}
+    rm links-testnet.md bootstrap.dat*.zip
+fi
 
 # build confs
 function render_conf() {

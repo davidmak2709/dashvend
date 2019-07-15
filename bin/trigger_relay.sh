@@ -4,16 +4,9 @@
 ON=0
 OFF=1
 
-# RPI2 pinouts
+# RPI3 pinouts
 PINOUT_LIGHT=5
 PINOUT_RELEASE=6
-
-# ODROID pinouts
-if [ $(grep ODROID /proc/cpuinfo | wc -l ) -gt 0 ];then
-    PINOUT_LIGHT=173
-    PINOUT_RELEASE=171
-fi
-
 
 DEV=/sys/class/gpio
 LIGHT=$DEV/gpio${PINOUT_LIGHT}
