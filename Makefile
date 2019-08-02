@@ -9,14 +9,10 @@ repos:
 	mkdir -p repos
 	cd repos; \
 	git clone https://github.com/jgarzik/python-bitcoinrpc.git; \
-	git clone https://github.com/richardkiss/pycoin.git; \
 	git clone https://github.com/petertodd/python-bitcoinlib.git; \
 	ln -f -s ../repos/python-bitcoinrpc/bitcoinrpc ../bin/bitcoinrpc; \
-	ln -f -s ../repos/pycoin/pycoin ../bin/pycoin; \
 	ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
-	cd pycoin; \
-	git reset --hard "994c4c714f599c795f4b7d7f305926ca6cdd0349"; \
-	sudo python setup.py install
+
 
 dashd:
 	bin/_install_dashd.sh
@@ -37,9 +33,9 @@ init:
 	#sudo update-rc.d dashvend remove
 	#sudo update-rc.d dashvend defaults
 	#sudo update-rc.d dashvend enable
-	bin/gen_wallet_key.sh
+
 
 clean:
 	find . -type f -name '*.pyc' -exec rm {} \;
 	find . -type f -name '*.o' -exec rm {} \;
-	sudo rm -rf repos bin/bitcoin bin/pycoin bin/bitcoinrpc bin/trigger_relay bin/show_image
+	sudo rm -rf repos bin/bitcoin bin/bitcoinrpc bin/trigger_relay bin/show_image

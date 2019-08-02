@@ -83,7 +83,6 @@ class DashRPC(object):
             info(e)
             pass
         except JSONRPCException as e:
-            # "loading block index"
             info(e)
             pass
 

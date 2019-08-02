@@ -3,7 +3,7 @@
 import time
 
 from dashvend.logger import info  # stdout and file logging
-from dashvend.addresses import Bip32Chain  # purchase addresses
+from dashvend.addresses import RPCAddress  # purchase addresses
 from dashvend.dashrpc import DashRPC  # local daemon - balances/refunds
 from dashvend.dash_zmq import DashZMQ # dash network monitor (transactions)
 from dashvend.vend import Vend  # main app and hardware interface
@@ -19,16 +19,16 @@ if __name__ == "__main__":
     vend = Vend()
     dashzmq.connect()
     dashzmq.set_vend(vend)
-    
-    
+
+
     info("connecting to dashd, waiting for masternode and budget sync")
     dashrpc.connect()
     while(not dashrpc.ready()):
         time.sleep(10)
 
-    bip32 = Bip32Chain(mainnet=MAINNET, dashrpc=dashrpc)
+    addressGen = RPCAddress(mainnet=MAINNET, dashrpc=dashrpc)
 
-    vend.set_address_chain(bip32)  # attach address chain
+    vend.set_address_chain(addressGen)  # attach address chain
     vend.set_product_cost(VENDING_COST)  # set product cost in dash
     vend.set_dashrpc(dashrpc)  # attach local wallet for refunds
 

@@ -34,14 +34,14 @@ class Vend(object):
 
     # payment processing
 
-    def set_address_chain(self, bip32):
+    def set_address_chain(self, addressGen):
         """ attach pycoin key instance """
-        self.bip32 = bip32
+        self.addressGen = addressGen
         self.get_next_address()
 
-    def get_next_address(self, increment=False):
+    def get_next_address(self):
         """ payment address to monitor """
-        self.current_address = self.bip32.get_next_address(increment)
+        self.current_address = self.addressGen.get_next_address()
 
     def set_product_cost(self, cost):
         """ set required float value to trigger sale """
