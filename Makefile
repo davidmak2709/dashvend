@@ -9,9 +9,9 @@ repos:
 	mkdir -p repos
 	cd repos; \
 	git clone https://github.com/jgarzik/python-bitcoinrpc.git; \
-	git clone https://github.com/petertodd/python-bitcoinlib.git; \
+	#git clone https://github.com/petertodd/python-bitcoinlib.git; \
 	ln -f -s ../repos/python-bitcoinrpc/bitcoinrpc ../bin/bitcoinrpc; \
-	ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
+	#ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
 
 
 dashd:
