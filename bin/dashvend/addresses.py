@@ -15,7 +15,6 @@ class RPCAddress(object):
         """ get address and received amount """
         addr = self.dashrpc._proxy.getnewaddress()
         return {
-            "index": index,
             "addr": addr,
             "received": float(
                 self.dashrpc._proxy.getreceivedbyaddress(addr))
