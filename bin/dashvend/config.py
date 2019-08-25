@@ -1,5 +1,5 @@
 # set this to the full path to the dashvend respository checkout
-DASHVEND_DIR = '/home/david/dashvend'
+DASHVEND_DIR = '/home/pi/dashvend'
 # note: also update paths in:
 #   bin/.init.d.dashvend
 #   bin/_dashvend_control.sh
@@ -9,7 +9,7 @@ DASHVEND_DIR = '/home/david/dashvend'
 
 
 # set your dashcore dir location
-DASHCORE_DIR = "/home/david/dash"
+DASHCORE_DIR = "/home/pi/dash"
 
 # after testing, set this to True to use mainnet
 MAINNET = False

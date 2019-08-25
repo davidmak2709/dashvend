@@ -14,10 +14,10 @@ cd ~
 mkdir dash
 cd dash
 if [ ! -e dashcore-0.14.0 ]; then
-    wget https://github.com/dashpay/dash/releases/download/v0.14.0.2/dashcore-0.14.0.2-x86_64-linux-gnu.tar.gz
+    wget https://github.com/dashpay/dash/releases/download/v0.14.0.3/dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
 fi
-tar zxvf dashcore-0.14.0.2-x86_64-linux-gnu.tar.gz
-rm dashcore-0.14.0.2-x86_64-linux-gnu.tar.gz
+tar zxvf dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
+rm dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
 ln -s dashcore-0.14.0/bin/dash-cli .
 ln -s dashcore-0.14.0/bin/dashd .
 

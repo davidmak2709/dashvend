@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DASHDIR=/home/pi/.dash
+DASHDIR=/home/pi/.dashcore
 VENDDIR=/home/pi/dashvend
 
 cd $VENDDIR/bin
