@@ -9,9 +9,7 @@ repos:
 	mkdir -p repos
 	cd repos; \
 	git clone https://github.com/jgarzik/python-bitcoinrpc.git; \
-	#git clone https://github.com/petertodd/python-bitcoinlib.git; \
 	ln -f -s ../repos/python-bitcoinrpc/bitcoinrpc ../bin/bitcoinrpc; \
-	#ln -f -s ../repos/python-bitcoinlib/bitcoin ../bin/bitcoin; \
 
 
 dashd:
@@ -38,4 +36,4 @@ init:
 clean:
 	find . -type f -name '*.pyc' -exec rm {} \;
 	find . -type f -name '*.o' -exec rm {} \;
-	sudo rm -rf repos bin/bitcoin bin/bitcoinrpc bin/trigger_relay bin/show_image
+	sudo rm -rf repos bin/bitcoinrpc bin/trigger_relay bin/show_image
