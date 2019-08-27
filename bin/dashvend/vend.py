@@ -65,9 +65,10 @@ class Vend(object):
             self.state, self.current_address, float(self.cost / 1e8))
 
     def process_IS_transaction(self, tx):
-        if float(tx["amount"]) == VENDING_COST:
+        amount = float(tx["amount"])
+	if amount == VENDING_COST:
             self.trigger_sale()
-        else:
+        elif amount > 0:
             self._refund(tx)
 
 
