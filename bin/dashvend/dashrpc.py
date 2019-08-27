@@ -67,7 +67,7 @@ class DashRPC(object):
     def get_cpu_average(self):
         pidfile = self.mainnet and DASHCORE_DIR + '/dashd.pid' or DASHCORE_DIR + '/testnet/testnet3/dashd.pid'  # noqa
         cmd = "top -p `cat %s` -n1 | awk '/ dashd /{print $10}'" % pidfile
-        cpu = subprocess.check_output(cmd, shell=True).rstrip('\n') or 100
+        cpu = subprocess.check_output(str.encode(cmd), shell=True, universal_newlines=True).rstrip('\n') or 100
         return self.cpu_pct(cpu)
 
     def ready(self):

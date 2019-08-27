@@ -9,10 +9,10 @@ DASHVEND_DIR = '/home/pi/dashvend'
 
 
 # set your dashcore dir location
-DASHCORE_DIR = "/home/pi/dash"
+DASHCORE_DIR = "/home/pi/.dashcore"
 
 # after testing, set this to True to use mainnet
-MAINNET = False
+MAINNET = True
 
 # dash value required to trigger sale
-VENDING_COST = 0.01
+VENDING_COST = 0.001

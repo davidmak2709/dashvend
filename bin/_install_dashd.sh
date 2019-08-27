@@ -13,7 +13,7 @@ touch dashd.pid testnet/testnet3/dashd.pid
 cd ~
 mkdir dash
 cd dash
-if [ ! -e dashcore-0.14.0 ]; then
+if [ ! -e dash ]; then
     wget https://github.com/dashpay/dash/releases/download/v0.14.0.3/dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
 fi
 tar zxvf dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
