@@ -66,7 +66,7 @@ class Vend(object):
 
     def process_IS_transaction(self, tx):
         amount = float(tx["amount"])
-	if amount == VENDING_COST:
+        if amount == VENDING_COST:
             self.trigger_sale()
         elif amount > 0:
             self._refund(tx)

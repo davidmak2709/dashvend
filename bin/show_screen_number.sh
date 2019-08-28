@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# FIXME -- move to common include
-VEND_DIR=/home/david/dashvend
+
+VEND_DIR=/home/pi/dashvend
 BIN_DIR=$VEND_DIR/bin
 IMAGEDIR=$VEND_DIR/display/source_images
 OUTDIR=/tmp/rendered_images
