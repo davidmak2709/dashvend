@@ -19,6 +19,7 @@ class Vend(object):
     SALE = 2
     TXREFUND = 3
     SHUTDOWN = 4
+    OVERPAID = 5
 
     def __init__(self):
         """ connect hardware, initialize state dir """
@@ -51,10 +52,9 @@ class Vend(object):
     # vending processing
 
     def trigger_sale(self):
-        self.set_state(Vend.SALE)
         self.trigger.trigger()
         Timer(15, lambda: self.set_state(Vend.READY), ()).start()
-
+        
     def show_txrefund(self):
         self.set_state(Vend.TXREFUND)
         Timer(10, lambda: self.set_state(Vend.READY), ()).start()
@@ -67,6 +67,7 @@ class Vend(object):
     def process_IS_transaction(self, tx):
         amount = float(tx["amount"])
         if amount == VENDING_COST:
+            self.set_state(Vend.SALE)
             self.trigger_sale()
         elif amount > 0:
             self._refund(tx)
@@ -80,6 +81,7 @@ class Vend(object):
             self.show_txrefund()
         elif amount > VENDING_COST:
             self.sendtoaddress(addr = address,amount = amount - VENDING_COST)
+            self.set_state(Vend.OVERPAID)
             self.trigger_sale()
 
     def sendtoaddress(self, addr, amount):
