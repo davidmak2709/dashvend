@@ -1,5 +1,5 @@
 
-default: deps repos dashd setuids
+default: deps repos dashd setuids init
 
 deps:
 	sudo apt-get -y install vim git imagemagick fbi qrencode curl unzip screen python-setuptools
@@ -27,10 +27,10 @@ setuids:
 	sudo chmod 4755 bin/trigger_relay
 
 init:
-	#sudo cp bin/.init.d.dashvend /etc/init.d/dashvend
-	#sudo update-rc.d dashvend remove
-	#sudo update-rc.d dashvend defaults
-	#sudo update-rc.d dashvend enable
+	sudo cp bin/.init.d.dashvend /etc/init.d/dashvend
+	sudo update-rc.d dashvend remove
+	sudo update-rc.d dashvend defaults
+	sudo update-rc.d dashvend enable
 
 
 clean:
