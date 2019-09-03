@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -e ~/dash/dash.conf ]; then
+if [ -e ~/.dashcore/dash.conf ]; then
     exit 0
 fi
 
@@ -11,9 +11,9 @@ cp -f bin/.dash.conf.template ~/.dashcore
 cd ~/.dashcore
 touch dashd.pid testnet/testnet3/dashd.pid
 cd ~
-mkdir dash
-cd dash
 if [ ! -e dash ]; then
+    mkdir dash
+    cd dash
     wget https://github.com/dashpay/dash/releases/download/v0.14.0.3/dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
 fi
 tar zxvf dashcore-0.14.0.3-arm-linux-gnueabihf.tar.gz
