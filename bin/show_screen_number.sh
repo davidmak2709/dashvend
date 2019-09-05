@@ -28,7 +28,7 @@ function gen_screen_payment_pending(){
     /usr/bin/convert $IMG_BG_PAYMENT_SCREEN \
         -fill "rgb(0, 141, 228)" \
         -pointsize 60 -draw "text 170,150   '$amount'" \
-        -pointsize 22 -gravity South -draw "text 0,40 '$addinput'" \
+        -pointsize 20 -gravity South -draw "text 0,40 '$addinput'" \
         $OUTDIR/payment_screen.png
     /usr/bin/composite -geometry +75+387 $OUTDIR/qrd.png $OUTDIR/payment_screen.png $OUTDIR/screen-1.png
     rm $OUTDIR/{payment_screen,qr,qrd}.png 2>/dev/null
